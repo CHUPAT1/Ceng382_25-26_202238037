@@ -12,6 +12,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  font-family: 'Brush Script MT', cursive;
 }
 
 
@@ -22,6 +23,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: -1;
 }
 body {
   margin: 0;
@@ -144,8 +146,6 @@ body {
   justify-content: center;
   width: 400px;
   height: 400px;
-  background-color: rgb(157, 157, 157);
-  background-image: url("https://safikumar00.github.io/assets/border.svg");
   background-size: 98%;
   background-repeat: no-repeat;
   background-position: center;
@@ -385,4 +385,14 @@ body {
 
 .container button:hover {
   background: #af0303;
+}
+.formclass{
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #222222;
+  border-radius: 5px;
+  background: #2a2a2a;
+  color: #d9d9d9;
+  font-size: 1vh;
 }

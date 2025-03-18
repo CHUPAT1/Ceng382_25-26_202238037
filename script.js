@@ -36,7 +36,14 @@ function updateClock() {
 document.getElementById('loginBtn').addEventListener('click', function() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-
+    // This following line of code is completely mine.
+    if(username == "admin" && password == "admin"){
+        window.location.href = "table.html";;
+    }
+    else{
+        alert("Invalid name or password!")
+    }
+    //These are the codes that I took from GROK AI
     if (username && password) {
         // Create user object
         const user = {
@@ -49,7 +56,6 @@ document.getElementById('loginBtn').addEventListener('click', function() {
         document.getElementById('username').value = '';
         document.getElementById('password').value = '';
 
-        alert('Samurai created successfully!');
 
         console.log('Current users:', users);
     } else {
@@ -57,11 +63,13 @@ document.getElementById('loginBtn').addEventListener('click', function() {
     }
 });
 
+
 // Optional: Function to get all users (for debugging purposes)
 function getAllUsers() {
     return users;
 
 }
+
 var users = []
 setInterval(updateClock, 1000);
 updateClock();
