@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using LabProject.Models;
 using LabProject.Helpers;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+using System.Text.Json;
 using System.Linq;
 
 namespace LabProject.Pages
@@ -28,10 +31,15 @@ namespace LabProject.Pages
 
         public List<int> FilteredClassIds { get; set; } = new List<int>();
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
             string[] classNames = { "MIS", "CENG", "SENG", "MAN" };
             string[] descriptions = { "Management Information Systems", "Computer Engineering", "Software Engineering", "Management" };
+
+            if (!IsUserAuthenticated())
+            {
+                return RedirectToPage("/Login");
+            }
 
             if (!Classes.Any())
             {
@@ -80,6 +88,21 @@ namespace LabProject.Pages
                 .ToList();
 
             FilteredClasses = paginated;
+
+            return Page();
+        }
+
+        private bool IsUserAuthenticated()
+        {
+            var sessionToken = HttpContext.Session.GetString("token");
+            var cookieToken = Request.Cookies["AuthToken"];
+            return sessionToken == cookieToken && !string.IsNullOrEmpty(sessionToken);
+        }
+        
+        public IActionResult OnPostLogout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToPage("/Login");
         }
 
         public IActionResult OnGetEdit(int id)
